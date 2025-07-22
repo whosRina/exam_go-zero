@@ -1,0 +1,47 @@
+syntax = "v1"
+
+type LoginReq {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+type LoginResp {
+	Username string `json:"username"`
+	Token    string `json:"token"`
+}
+
+@server (
+	jwt:     Auth
+	prefix:  /user // 对当前 Foo 语法块下的所有路由，新增 /user路由前缀，不需要则请删除此行
+	timeout: 3s // 对当前 Foo 语法块下的所有路由进行超时配置，不需要则请删除此行
+)
+service users {
+	//登录
+	@handler login
+	post /login (LoginReq) returns (LoginResp)
+
+	//注销登录
+	@handler loginOut
+	get /loginOut
+
+	//创建用户
+	@handler create
+	post /create
+
+	//更新用户
+	@handler update
+	post /update
+
+	//删除用户
+	@handler delete
+	post /delete
+
+	//具体用户信息
+	@handler detail
+	get /detail
+
+	//用户信息列表
+	@handler userList
+	get /userList
+}
+

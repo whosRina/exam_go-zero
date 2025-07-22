@@ -1,0 +1,21 @@
+Name: question
+Host: 0.0.0.0
+Port: 8887
+
+Auth:
+  AccessSecret: qwertyuioplkjhgfdxz12345678ijnbvcde5yujnbv
+  AccessExpire: 36000
+
+DataSource: root:061811@tcp(127.0.0.1:3306)/exam?charset=utf8mb4&parseTime=True&loc=Local
+
+Cors:
+  allowedOrigins:
+    - "*"   # 允许所有来源
+  allowedMethods:
+    - "GET"
+    - "POST"
+    - "OPTIONS"
+  allowedHeaders:
+    - "Content-Type"
+    - "Authorization"
+  allowCredentials: true   # 允许携带Cookie

@@ -1,0 +1,37 @@
+syntax = "v1"
+
+@server (
+	jwt:     Auth
+	prefix:  /classes // 对当前 Foo 语法块下的所有路由，新增 /user路由前缀，不需要则请删除此行
+	timeout: 3s // 对当前 Foo 语法块下的所有路由进行超时配置，不需要则请删除此行
+)
+service class {
+	//创建班级
+	@handler create
+	post /create
+
+	//更新班级
+	@handler update
+	post /update
+
+	//删除班级
+	@handler delete
+	post /delete
+
+	//具体班级信息
+	@handler detail
+	get /detail
+
+	//班级列表
+	@handler classList
+	get /classList
+
+	//加入班级
+	@handler joinClass
+	post /joinClass
+
+	// 设置是否允许加入班级
+	@handler setJoinable
+	post /setJoinable
+}
+

@@ -1,0 +1,49 @@
+syntax = "v1"
+
+@server (
+	jwt:     Auth
+	prefix:  /questions // 统一前缀，所有路由都在/questions 下
+	timeout: 3s
+)
+service question {
+	// 创建题库
+	@handler createBank
+	post /createBank
+
+	// 更新题库信息
+	@handler updateBank
+	post /updateBank
+
+	// 删除题库
+	@handler deleteBank
+	post /deleteBank
+
+	// 获取题库列表
+	@handler bankList
+	get /bankList
+
+	// 题库详情
+	@handler bankDetail
+	get /bankDetail
+
+	// 创建题目
+	@handler createQuestion
+	post /createQuestion
+
+	// 更新题目信息
+	@handler updateQuestion
+	post /updateQuestion
+
+	// 删除题目
+	@handler deleteQuestion
+	post /deleteQuestion
+
+	// 获取题目列表（可根据题库筛选）
+	@handler questionList
+	get /questionList
+
+	// 题目详情
+	@handler questionDetail
+	get /questionDetail
+}
+

@@ -1,0 +1,97 @@
+syntax = "v1"
+
+@server (
+	jwt:     Auth
+	prefix:  /paper
+	timeout: 3s
+)
+service paper {
+	// 试卷管理
+	@handler createPaper
+	post /createPaper // 创建试卷
+
+	@handler deletePaper
+	post /deletePaper // 删除试卷
+
+	@handler updatePaper
+	post /updatePaper // 更新试卷信息
+
+	@handler getPaperDetail
+	post /getPaperDetail // 获取试卷详细信息
+
+	@handler listPapers
+	post /listPapers // 获取试卷列表
+
+	// 规则管理
+	@handler createPaperRule
+	post /createPaperRule // 创建随机组卷规则
+
+	@handler deletePaperRule
+	post /deletePaperRule // 删除随机组卷规则
+
+	@handler updatePaperRule
+	post /updatePaperRule // 更新随机组卷规则
+
+	@handler getPaperRuleDetail
+	post /getPaperRuleDetail // 获取规则详细信息
+
+	@handler listPaperRules
+	post /listPaperRules // 获取规则列表
+
+	// 教师端功能
+	@handler generatePaperByRuleForTeacher
+	post /generatePaperByRuleForTeacher // 教师端：根据规则生成试卷（辅助生成）
+
+	@handler getPaperWithAnswers
+	post /getPaperWithAnswers // 教师端：获取试卷详细信息（包含答案）
+
+	// 学生端功能
+	@handler getPaperByRuleForStudent
+	post /getPaperByRuleForStudent // 学生端：获取考试时的随机试题
+
+	@handler getPaperWithoutAnswers
+	post /getPaperWithoutAnswers // 学生端：获取试卷详细信息（不包含答案）
+	    // 考试管理----------------------------------------------------------
+        @handler createExam
+        post /createExam // 创建考试（区分固定/随机试卷）
+
+        @handler deleteExam
+        post /deleteExam // 删除考试
+
+        @handler updateExam
+        post /updateExam // 更新考试信息
+
+        @handler getExamDetail
+        post /getExamDetail // 获取考试详细信息
+
+        @handler listExams
+        post /listExams // 考试列表（教师端带鉴权）
+
+        // 成绩管理 --------------------------------------------------------------
+        @handler getExamStatistics
+        post /getExamStatistics // 成绩统计（班级平均分/最高分/分数分布等）
+
+        @handler getStudentScores
+        post /getStudentScores // 查看学生成绩详情（包含每题得分）
+
+        @handler exportScores
+        post /exportScores // Excel导出班级成绩
+
+        // 手动阅卷相关 ----------------------------------------------------------
+        @handler listManualGrading
+        post /listManualGrading // 需要人工评分的试卷列表
+
+        @handler submitManualScore
+        post /submitManualScore // 提交人工评阅结果
+
+        // 学生考试流程 ----------------------------------------------------------
+        @handler startExam
+        post /startExam // 学生开始考试（生成随机试卷或获取固定试卷）
+
+        @handler submitAnswer
+        post /submitAnswer // 提交考试答案（自动/人工评分）
+
+        @handler getExamResult
+        post /getExamResult // 查询成绩结果（结合can_view_results配置）
+}
+
